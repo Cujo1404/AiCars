@@ -1,0 +1,52 @@
+// Set the date we're counting down to
+var countDownDate = new Date("Jul 31, 2024 15:37:25").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+    // Get today's date and time
+    var now = new Date().getTime();
+    
+    // Find the distance between now and the count down date
+    var distance = countDownDate - now;
+    
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+    // Display the result in the element with id="countdown"
+    document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+    + minutes + "m " + seconds + "s ";
+    
+    // If the count down is finished, write some text
+    if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("countdown").innerHTML = "EXPIRED";
+    }
+}, 1000);
+
+
+// Falling logos animation
+document.getElementById('trigger').addEventListener('click', function() {
+    const container = document.getElementById('falling-logos');
+    container.innerHTML = '';
+    for (let i = 0; i < 130; i++) {
+        const logo = document.createElement('img');
+        logo.src = 'image-from-rawpixel-id-6772898-png-2.png';  // Replace with your logo path
+        logo.classList.add('logo-fall');
+        logo.style.left = Math.random() * 180 + 'vw';
+        logo.style.animationDelay = Math.random() * 5 + 's';
+        
+        // Randomly flip some logos horizontally
+        if (Math.random() > 0.5) {
+            logo.style.transform = 'scaleX(-1)';
+        }
+        
+        container.appendChild(logo);
+    }
+
+    setTimeout(() => {
+        container.innerHTML = '';
+    }, 16000);  // Allow time for all animations to complete
+});
